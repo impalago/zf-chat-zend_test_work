@@ -27,7 +27,7 @@ class Module
     {
         return [
             'factories' => [
-                Model\ChatTable::class => function($container) {
+                Model\ChatTable::class => function ($container) {
                     $tableGateway = $container->get(Model\ChatTableGateway::class);
                     return new Model\ChatTable($tableGateway);
                 },
@@ -48,7 +48,7 @@ class Module
     {
         return [
             'factories' => [
-                Controller\IndexController::class => function($container) {
+                Controller\IndexController::class => function ($container) {
                     return new Controller\IndexController(
                         $container->get(Model\ChatTable::class)
                     );

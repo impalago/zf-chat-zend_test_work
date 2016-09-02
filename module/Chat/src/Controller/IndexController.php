@@ -7,6 +7,7 @@
 
 namespace Chat\Controller;
 
+use Chat\Form\ChatForm;
 use Chat\Model\ChatTable;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -30,7 +31,8 @@ class IndexController extends AbstractActionController
     public function indexAction()
     {
         return new ViewModel([
-            'messages' => $this->table->fetchAll()
+            'messages' => $this->table->fetchAll(),
+            'form' => new ChatForm()
         ]);
     }
 }
