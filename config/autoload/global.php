@@ -12,5 +12,8 @@
  */
 
 return [
-    // ...
+    'db' => [
+        'driver' => 'Pdo',
+        'dsn'    => sprintf('sqlite:%s/data/zf-chat.db', realpath(getcwd())),
+    ],
 ];
