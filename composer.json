@@ -22,12 +22,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Application\\": "module/Application/src/"
+            "Chat\\": "module/Chat/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ApplicationTest\\": "module/Application/test/"
+            "ChatTest\\": "module/Chat/test/"
         }
     },
     "extra": [],
