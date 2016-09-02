@@ -24,8 +24,13 @@ class IndexController extends AbstractActionController
         $this->table = $table;
     }
 
+    /**
+     * @return ViewModel
+     */
     public function indexAction()
     {
-        return new ViewModel();
+        return new ViewModel([
+            'messages' => $this->table->fetchAll()
+        ]);
     }
 }
