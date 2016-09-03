@@ -76,7 +76,7 @@ class IndexController extends AbstractActionController
     {
         $messages = $this->table->fetchAll();
         $data = [];
-        if($messages->count() > 0) {
+        if ($messages->count() > 0) {
             foreach ($messages as $key => $message) {
                 $data[$key]['created'] = $message->created;
                 $data[$key]['text'] = $message->text;

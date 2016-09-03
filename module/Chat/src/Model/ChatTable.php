@@ -41,7 +41,7 @@ class ChatTable
     {
         $data = [
             'text' => $chat->text,
-            'created'  => $chat->created,
+            'created' => $chat->created,
         ];
 
         $this->tableGateway->insert($data);
@@ -53,7 +53,8 @@ class ChatTable
      *
      * @return int
      */
-    public function numberMessages() {
+    public function numberMessages()
+    {
 
         return $this->tableGateway->delete(function (Delete $delete) {
             $delete->where('id <= (
