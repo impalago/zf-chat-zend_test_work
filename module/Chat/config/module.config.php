@@ -16,7 +16,7 @@ return [
             'home' => [
                 'type' => Segment::class,
                 'options' => [
-                    'route' => '/[/:action]',
+                    'route' => '/[:action]',
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action' => 'index',

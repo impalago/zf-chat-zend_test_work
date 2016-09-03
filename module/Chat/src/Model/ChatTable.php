@@ -1,6 +1,7 @@
 <?php
 namespace Chat\Model;
 
+use Zend\Db\Sql\Delete;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 
@@ -27,6 +28,39 @@ class ChatTable
     {
         return $this->tableGateway->select(function (Select $select) {
             $select->order('created DESC');
+        });
+    }
+
+    /**
+     * Create new message
+     *
+     * @param Chat $chat
+     * @return string
+     */
+    public function saveMessage(Chat $chat)
+    {
+        $data = [
+            'text' => $chat->text,
+            'created'  => $chat->created,
+        ];
+
+        $this->tableGateway->insert($data);
+        return 'success';
+    }
+
+    /**
+     * Deleting old messages
+     *
+     * @return int
+     */
+    public function numberMessages() {
+
+        return $this->tableGateway->delete(function (Delete $delete) {
+            $delete->where('id <= (
+                SELECT id FROM messages
+                ORDER BY id DESC
+                LIMIT 10,1
+            )');
         });
     }
 

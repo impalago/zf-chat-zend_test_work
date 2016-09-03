@@ -8,6 +8,7 @@
 namespace Chat\Controller;
 
 use Chat\Form\ChatForm;
+use Chat\Model\Chat;
 use Chat\Model\ChatTable;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -35,4 +36,36 @@ class IndexController extends AbstractActionController
             'form' => new ChatForm()
         ]);
     }
+
+    /**
+     * @return mixed
+     */
+    public function addAction()
+    {
+        $form = new ChatForm();
+
+        $request = $this->getRequest();
+
+        $chat = new Chat();
+        $form->setInputFilter($chat->getInputFilter());
+        $form->setData($request->getPost());
+
+        if (!$form->isValid()) {
+            echo 'The field can not be empty!';
+            die;
+        }
+
+        $this->table->numberMessages();
+        $formData = $form->getData();
+        $newMessage = [
+            'text' => $formData['text'],
+            'created' => date('Y-m-d h:i:s')
+        ];
+
+        $chat->exchangeArray($newMessage);
+        $this->table->saveMessage($chat);
+        echo 'success';
+        die;
+    }
+
 }
