@@ -5,7 +5,6 @@ var commonProperties = {
      *
      * @param $elem
      * @param callback
-     * @param data
      **/
     'queryAjax' : function($elem, callback) {
         $.ajax({
@@ -20,8 +19,28 @@ var commonProperties = {
                 }
             }
         });
-    }
+    },
 
+    /**
+     * Update table messages
+     *
+     **/
+    'updateData' : function() {
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            url: '/get-messages',
+            success: function(data) {
+                var tableData = '';
+                $.each(data, function (key, value) {
+                    tableData += '<tr><td class="col-xs-6 col-sm-4">' + value.created +'</td><td class="col-xs-6 col-sm-8">' + value.text +'</td></tr>';
+                });
+
+                $('.table tbody').html(tableData);
+            }
+        });
+    }
 };
 
 $(function() {
@@ -29,7 +48,7 @@ $(function() {
     $('#chat-form').on('submit', function(e) {
         e.preventDefault();
         commonProperties.queryAjax($(this), function (data) {
-            console.log(data);
+            commonProperties.updateData();
             $('#chat-form')[0].reset();
         });
 

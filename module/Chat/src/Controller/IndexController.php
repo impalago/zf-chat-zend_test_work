@@ -68,4 +68,22 @@ class IndexController extends AbstractActionController
         die;
     }
 
+    /**
+     * Update list messages (fot Ajax request)
+     *
+     */
+    public function getMessagesAction()
+    {
+        $messages = $this->table->fetchAll();
+        $data = [];
+        if($messages->count() > 0) {
+            foreach ($messages as $key => $message) {
+                $data[$key]['created'] = $message->created;
+                $data[$key]['text'] = $message->text;
+            }
+        }
+
+        echo json_encode($data);
+        die;
+    }
 }
