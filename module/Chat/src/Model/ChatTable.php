@@ -27,7 +27,7 @@ class ChatTable
     public function fetchAll()
     {
         return $this->tableGateway->select(function (Select $select) {
-            $select->order('created DESC');
+            $select->order('id DESC');
         });
     }
 

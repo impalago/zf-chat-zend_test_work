@@ -45,13 +45,26 @@ var commonProperties = {
 
 $(function() {
 
-    $('#chat-form').on('submit', function(e) {
+    var form = $('#chat-form');
+
+    form.on('submit', function(e) {
         e.preventDefault();
         commonProperties.queryAjax($(this), function (data) {
-            commonProperties.updateData();
-            $('#chat-form')[0].reset();
+            if(data === 'success') {
+                commonProperties.updateData();
+                $('#chat-form')[0].reset();
+                form.find('.text-field').removeClass('has-error');
+            } else {
+                form.find('.text-field').addClass('has-error');
+            }
+
         });
 
     });
+
+    if (form.find('input[type=text]').is(":focus")) {
+        alert(444);
+        form.find('.form-group').removeClass('has-error');
+    }
 
 });

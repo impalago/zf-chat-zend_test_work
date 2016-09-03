@@ -14,7 +14,7 @@ class ChatForm extends Form
             'name' => 'text',
             'type' => 'text',
             'attributes' => [
-                'class' => 'form-control col-md-4',
+                'class' => 'form-control',
                 'placeholder' => 'Let\'s type something here!',
             ],
         ]);
