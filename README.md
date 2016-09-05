@@ -11,3 +11,5 @@ Install packages
 ```bash
 $ composer install
 ```
+
+The folder "/data" must be writable
