@@ -11,6 +11,7 @@ use Chat\Form\ChatForm;
 use Chat\Model\Chat;
 use Chat\Model\ChatTable;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
@@ -51,8 +52,8 @@ class IndexController extends AbstractActionController
         $form->setData($request->getPost());
 
         if (!$form->isValid()) {
-            echo 'The field can not be empty!';
-            die;
+            $this->getResponse()->setStatusCode(400);
+            return;
         }
 
         $this->table->numberMessages();
@@ -64,8 +65,12 @@ class IndexController extends AbstractActionController
 
         $chat->exchangeArray($newMessage);
         $this->table->saveMessage($chat);
-        echo 'success';
-        die;
+
+        $jsonModel = new JsonModel([
+            'response' => 'success'
+        ]);
+
+        return $jsonModel;
     }
 
     /**
@@ -83,7 +88,11 @@ class IndexController extends AbstractActionController
             }
         }
 
-        echo json_encode($data);
-        die;
+        $jsonModel = new JsonModel([
+            'data' => $data,
+            'response' => 'success'
+        ]);
+
+        return $jsonModel;
     }
 }
