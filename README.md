@@ -3,7 +3,7 @@
 Clone the repo
 
 ```bash
-$ git clone https://github.com/briansky-code/zf-chat.git
+$ git clone https://github.com/impalago/zf-chat-zend_test_work.git
 ```
 
 Install packages
